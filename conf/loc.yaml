@@ -1,5 +1,6 @@
 env: loc
 logLevel: DEBUG
+app: app1
 
 mongo:
   host: dev-api.neoclub.cn
