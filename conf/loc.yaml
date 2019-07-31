@@ -1,0 +1,6 @@
+env: loc
+logLevel: DEBUG
+
+mongo:
+  host: dev-api.neoclub.cn
+  port: 27017
