@@ -52,4 +52,5 @@ do
         echo 'An error has occurred! Aborting the script execution...'
         exit 1
     fi
+    packr2 clean
 done
