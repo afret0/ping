@@ -8,6 +8,8 @@ import (
 )
 
 func init() {
+	//cmd := exec.Command("packr2")
+
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
 	box := packr.New("confBox", ".")
 	configType := "yaml"
@@ -42,4 +44,5 @@ func init() {
 			panic(err)
 		}
 	}
+
 }
