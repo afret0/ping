@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/viper"
 	_ "goFrame/conf"
+	"time"
 )
 
 func main() {
@@ -15,7 +16,11 @@ func main() {
 	//_ = viper.ReadInConfig()
 	logLevel := viper.GetString("logLevel")
 	//app := viper.GetString("app")
-	ping := viper.GetString("ping")
+	//ping := viper.GetString("ping")
 	fmt.Println(logLevel)
-	fmt.Println(ping)
+	for {
+
+		fmt.Println(viper.GetString("ping"))
+		time.Sleep(time.Second * 1)
+	}
 }

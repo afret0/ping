@@ -1,0 +1,7 @@
+app: goFrame
+env: dev
+logLevel: DEBUG
+
+mongo:
+  host: dev-api.neoclub.cn
+  port: 27017
