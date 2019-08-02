@@ -14,7 +14,8 @@ func main() {
 	//viper.AddConfigPath("conf")
 	//_ = viper.ReadInConfig()
 	logLevel := viper.GetString("logLevel")
-	app := viper.GetString("app")
+	//app := viper.GetString("app")
+	ping := viper.GetString("ping")
 	fmt.Println(logLevel)
-	fmt.Println(app)
+	fmt.Println(ping)
 }
