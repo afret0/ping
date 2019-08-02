@@ -1,2 +1,3 @@
-app: test2
+app: goFrame
 mongo:
+consul: http://dev-api.neoclub.cn:8500/v1/kv/dev/uki-relationship?raw
