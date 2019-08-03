@@ -9,19 +9,28 @@ import (
 	"time"
 )
 
-var conf etc
+var Etc *config
 
-type etc struct {
+type config struct {
 	ping string
 	app  string
 }
 
-func GetConfig() etc {
-
-}
+//func GetEtc() *config {
+//	etc := new(config)
+//	etc.ping = viper.GetString("ping")
+//	return etc
+//}
 
 func init() {
+	Etc = new(config)
+	initConfig()
+	//Etc = new(config)
+	//Etc := new(config)
+	//Etc.ping = viper.GetString("ping")
+}
 
+func initConfig() {
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
 	box := packr.New("confBox", ".")
 	configType := "yaml"
@@ -63,10 +72,10 @@ func init() {
 	}
 	go func() {
 		for {
-
 			time.Sleep(time.Second * 1)
 			err = viper.WatchRemoteConfig()
+			Etc.ping = viper.GetString("ping")
 		}
-
 	}()
+	Etc.ping = viper.GetString("ping")
 }

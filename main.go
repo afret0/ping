@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
-	_ "goFrame/conf"
+	"goFrame/conf"
 	"time"
 )
 
@@ -14,13 +13,13 @@ func main() {
 	//viper.SetConfigName("loc")
 	//viper.AddConfigPath("conf")
 	//_ = viper.ReadInConfig()
-	logLevel := viper.GetString("logLevel")
+	//logLevel := viper.GetString("logLevel")
 	//app := viper.GetString("app")
 	//ping := viper.GetString("ping")
-	fmt.Println(logLevel)
+	//fmt.Println(logLevel)
 	for {
-
-		fmt.Println(viper.GetString("ping"))
+		//fmt.Println(viper.GetString("ping"))
+		fmt.Println(conf.Etc)
 		time.Sleep(time.Second * 1)
 	}
 }
