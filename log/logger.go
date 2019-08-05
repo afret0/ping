@@ -5,11 +5,12 @@ import (
 	"os"
 )
 
-//func init() {
-//	initConfig()
-//}
+var logger *logrus.Logger
+
+func init() {
+	logger = logrus.New()
+}
 func GetLogger() *logrus.Logger {
-	logger := logrus.New()
 	env := os.Getenv("ENV")
 	if env == "pro" {
 		logger.SetFormatter(&logrus.JSONFormatter{})
