@@ -1,6 +1,9 @@
 app: goFrame
 env: dev
 logLevel: DEBUG
+consul:
+  host: localhost
+  port: 8500
 
 mongo:
   host: dev-api.neoclub.cn

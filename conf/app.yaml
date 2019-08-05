@@ -1,3 +1,6 @@
 app: goFrame
+port: 10110
 mongo:
-consul: http://dev-api.neoclub.cn:8500/v1/kv/dev/uki-relationship?raw
+consul:
+  host: localhost
+  port: 8500
