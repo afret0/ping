@@ -1,8 +1,11 @@
 package router
 
-import "goFrame/app/hello"
+import (
+	"github.com/gin-gonic/gin"
+	"goFrame/app/hello"
+)
 
-func init() {
-	helloRouter := GetRouter()
-	helloRouter.Handle("GET", "/hello", hello.Hello)
+func RegisteredHello(app *gin.Engine) {
+	helloRouter := app.Group("/hello")
+	helloRouter.Handle("GET", "/", hello.Hello)
 }

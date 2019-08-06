@@ -1,7 +1,11 @@
 package hello
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"goFrame/config"
+)
 
 func Hello(ctx *gin.Context) {
-	ctx.JSON(200, "kitty")
+	conf := config.GetConf()
+	ctx.JSON(200, conf.Ping)
 }

@@ -3,10 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"goFrame/router"
-
-	_ "goFrame/conf"
+	"goFrame/config"
 	"goFrame/log"
+	"goFrame/router"
 	"os"
 )
 
@@ -22,8 +21,14 @@ func init() {
 func main() {
 	logger := log.GetLogger()
 	logger.Info(viper.GetString("root"))
-	app := router.GetRouter()
-	err := app.Run(":" + viper.GetString("port"))
+
+	conf := config.GetConf()
+	app := gin.New()
+
+	router.RegisteredRoot(app)
+	router.RegisteredHello(app)
+
+	err := app.Run(":" + conf.Port)
 	if err != nil {
 		logger.Error(err)
 	}
