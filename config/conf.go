@@ -20,12 +20,17 @@ var conf *etc
 func init() {
 	initConfig()
 	conf = new(etc)
-	conf.Port = viper.GetString("port")
-	conf.App = viper.GetString("app")
-	conf.Ping = viper.GetString("ping")
+	updateConfig()
+
 }
 func GetConf() *etc {
 	return conf
+}
+
+func updateConfig() {
+	conf.Port = viper.GetString("port")
+	conf.App = viper.GetString("app")
+	conf.Ping = viper.GetString("ping")
 }
 func initConfig() {
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
@@ -72,6 +77,7 @@ func initConfig() {
 		for {
 			time.Sleep(time.Second * 1)
 			_ = viper.WatchRemoteConfig()
+			updateConfig()
 		}
 	}()
 }

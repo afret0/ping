@@ -6,6 +6,6 @@ import (
 )
 
 func RegisteredHello(app *gin.Engine) {
-	helloRouter := app.Group("/hello")
-	helloRouter.Handle("GET", "/", hello.Hello)
+	helloRouter := app.Group("/v1")
+	helloRouter.Handle("GET", "/hello", hello.Hello)
 }
