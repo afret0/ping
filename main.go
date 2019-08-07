@@ -24,6 +24,7 @@ func main() {
 
 	conf := config.GetConf()
 	app := gin.New()
+	app.Use(gin.Logger())
 
 	router.RegisteredRoot(app)
 	router.RegisteredHello(app)

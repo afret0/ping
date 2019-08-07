@@ -26,3 +26,4 @@ fmt.Println(conf.app)
 - [ ] 一键部署带个参数吧, 写死的好蠢
 - [ ] 数据库链接
 - [ ] 异常捕获
+- [ ] [fsnotiy](https://github.com/fsnotify/fsnotify/blob/master/example_test.go)

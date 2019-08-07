@@ -73,11 +73,16 @@ func initConfig() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	err = viper.WatchRemoteConfig()
+	if err != nil {
+		fmt.Println(err)
+	}
+	updateConfig()
 	go func() {
 		for {
-			time.Sleep(time.Second * 5)
 			_ = viper.WatchRemoteConfig()
 			updateConfig()
+			time.Sleep(time.Second * 5)
 		}
 	}()
 }

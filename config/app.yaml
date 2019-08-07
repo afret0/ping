@@ -1,5 +1,5 @@
 app: goFrame
-port: 10110
+port: 10111
 mongo:
 consul:
   host: localhost
