@@ -10,9 +10,9 @@ import (
 )
 
 type etc struct {
-	App  string
-	Port string
-	Ping string
+	App  string `json:"app"`
+	Port string `json:"port"`
+	Ping string `json:"ping"`
 }
 
 var conf *etc
@@ -28,9 +28,10 @@ func GetConf() *etc {
 }
 
 func updateConfig() {
-	conf.Port = viper.GetString("port")
-	conf.App = viper.GetString("app")
-	conf.Ping = viper.GetString("ping")
+	err := viper.Unmarshal(conf)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 func initConfig() {
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
