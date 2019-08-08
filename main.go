@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"goFrame/config"
-	"goFrame/log"
 	"goFrame/router"
+	"goFrame/utils"
 	"os"
 )
 
@@ -19,7 +19,7 @@ func init() {
 }
 
 func main() {
-	logger := log.GetLogger()
+	logger := utils.GetLogger()
 	logger.Info(viper.GetString("root"))
 
 	conf := config.GetConf()
