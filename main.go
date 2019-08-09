@@ -16,10 +16,11 @@ func init() {
 	default:
 		gin.SetMode(gin.DebugMode)
 	}
-	defer libs.CloseRedis()
 }
 
 func main() {
+	defer libs.CloseRedis()
+	defer libs.CloseMongoSession()
 	logger := libs.GetLogger()
 	logger.Info(viper.GetString("root"))
 

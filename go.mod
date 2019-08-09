@@ -49,5 +49,6 @@ require (
 	golang.org/x/sys v0.0.0-20190804053845-51ab0e2deafa // indirect
 	golang.org/x/tools v0.0.0-20190802220118-1d1727260058 // indirect
 	google.golang.org/grpc v1.22.1 // indirect
+	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
 	honnef.co/go/tools v0.0.1-2019.2.2 // indirect
 )

@@ -14,11 +14,18 @@ type redis struct {
 	Port int    `json:"port"`
 	Pwd  string `json:"pwd"`
 }
+type mongo struct {
+	Host string `json:"host"`
+	Port int    `json:"port"`
+	User string `json:"user"`
+	Pwd  string `json:"pwd"`
+}
 type etc struct {
 	App   string `json:"app"`
 	Port  string `json:"port"`
 	Ping  string `json:"ping"`
 	Redis redis  `json:"redis"`
+	Mongo mongo  `json:"mongo"`
 }
 
 var conf *etc

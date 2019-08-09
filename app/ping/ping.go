@@ -7,10 +7,25 @@ import (
 )
 
 func Ping(ctx *gin.Context) {
+	logger := libs.GetLogger()
 	db := 0
 	redis := libs.GetRedis(&db)
-	afreto, _ := redis.Get("afreto").Result()
+	afreto, err := redis.Get("afreto").Result()
+	if err != nil {
+		logger.Info(err)
+	}
 	fmt.Println(afreto)
-	//conf := config.GetConf()
+
+	dbName := "uki"
+	col := "order"
+	orderCol := libs.GetMongoCol(&dbName, &col)
+	query := make(map[string]string)
+	query["owner"] = "74"
+	var orderINfo *interface{}
+	err = orderCol.Find(query).One(&orderINfo)
+	if err != nil {
+		logger.Error(err)
+	}
+	logger.Warn(*orderINfo)
 	ctx.JSON(200, &afreto)
 }

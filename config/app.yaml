@@ -9,6 +9,8 @@ consul:
 mongo:
   host: dev-api.neoclub.cn
   port: 27017
+  user:
+  pwd:
 
 redis:
   host: dev-api.neoclub.cn
