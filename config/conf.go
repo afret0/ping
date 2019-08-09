@@ -9,10 +9,16 @@ import (
 	"time"
 )
 
+type redis struct {
+	Host string `json:"host"`
+	Port int    `json:"port"`
+	Pwd  string `json:"pwd"`
+}
 type etc struct {
-	App  string `json:"app"`
-	Port string `json:"port"`
-	Ping string `json:"ping"`
+	App   string `json:"app"`
+	Port  string `json:"port"`
+	Ping  string `json:"ping"`
+	Redis redis  `json:"redis"`
 }
 
 var conf *etc

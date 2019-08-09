@@ -1,6 +1,16 @@
 app: goFrame
 port: 10110
-mongo:
+env: loc
+logLevel: DEBUG
 consul:
-  host: localhost
+  host: 58.246.173.179
   port: 8500
+
+mongo:
+  host: dev-api.neoclub.cn
+  port: 27017
+
+redis:
+  host: dev-api.neoclub.cn
+  port: 6379
+  pwd:

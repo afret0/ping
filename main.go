@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"goFrame/config"
+	"goFrame/libs"
 	"goFrame/router"
-	"goFrame/utils"
 	"os"
 )
 
@@ -16,15 +16,17 @@ func init() {
 	default:
 		gin.SetMode(gin.DebugMode)
 	}
+	defer libs.CloseRedis()
 }
 
 func main() {
-	logger := utils.GetLogger()
+	logger := libs.GetLogger()
 	logger.Info(viper.GetString("root"))
 
 	conf := config.GetConf()
-	app := gin.New()
-	app.Use(gin.Logger())
+	//app := gin.New()
+	app := gin.Default()
+	//app.Use(gin.Logger())
 
 	router.RegisteredRoot(app)
 	router.RegisteredHello(app)
