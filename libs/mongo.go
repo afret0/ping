@@ -28,6 +28,7 @@ func newMongoSession() *mgo.Session {
 	return session
 }
 
+// GetMongoSession ...
 func GetMongoSession() *mgo.Session {
 	if mongoSessionStore._session != nil {
 		return mongoSessionStore._session
@@ -38,18 +39,21 @@ func GetMongoSession() *mgo.Session {
 	}
 }
 
+// GetMongoDB ...
 func GetMongoDB(name *string) *mgo.Database {
 	session := GetMongoSession()
 	DB := session.DB(*name)
 	return DB
 }
 
+// GetMongoCol ...
 func GetMongoCol(DBName *string, ColName *string) *mgo.Collection {
 	DB := GetMongoDB(DBName)
 	col := DB.C(*ColName)
 	return col
 }
 
+// CloseMongoSession ...
 func CloseMongoSession() {
 	session := GetMongoSession()
 	session.Close()

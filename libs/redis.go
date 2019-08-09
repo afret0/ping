@@ -20,6 +20,7 @@ func init() {
 	_ = GetRedis(&db)
 }
 
+// GetRedis ...
 func GetRedis(db *int) *redis.Client {
 	if redisClient, ok := redisClientStore._redis[*db]; ok {
 		return redisClient
@@ -30,6 +31,7 @@ func GetRedis(db *int) *redis.Client {
 	}
 }
 
+// CloseRedis ...
 func CloseRedis() {
 	for _, v := range redisClientStore._redis {
 		_ = v.Close()

@@ -10,6 +10,8 @@ var logger *logrus.Logger
 func init() {
 	logger = logrus.New()
 }
+
+// GetLogger ...
 func GetLogger() *logrus.Logger {
 	env := os.Getenv("ENV")
 	if env == "pro" {

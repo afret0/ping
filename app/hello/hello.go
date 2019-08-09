@@ -5,6 +5,7 @@ import (
 	"goFrame/config"
 )
 
+// Hello ...
 func Hello(ctx *gin.Context) {
 	conf := config.GetConf()
 	ctx.JSON(200, conf.Ping)

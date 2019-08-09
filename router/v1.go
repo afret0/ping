@@ -5,6 +5,7 @@ import (
 	"goFrame/app/hello"
 )
 
+// RegisteredHello ...
 func RegisteredHello(app *gin.Engine) {
 	helloRouter := app.Group("/v1")
 	helloRouter.Handle("GET", "/hello", hello.Hello)

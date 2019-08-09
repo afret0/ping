@@ -6,6 +6,7 @@ import (
 	"goFrame/libs"
 )
 
+// Ping ...
 func Ping(ctx *gin.Context) {
 	logger := libs.GetLogger()
 	db := 0

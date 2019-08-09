@@ -36,6 +36,8 @@ func init() {
 	updateConfig()
 
 }
+
+// GetConf ...
 func GetConf() *etc {
 	return conf
 }
