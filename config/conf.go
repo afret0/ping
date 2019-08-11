@@ -6,8 +6,6 @@ import (
 	"github.com/spf13/viper"
 	_ "github.com/spf13/viper/remote"
 	"goFrame/libs"
-	"io"
-	"io/ioutil"
 	"time"
 )
 
@@ -65,11 +63,14 @@ func initConfig() {
 	v := viper.New()
 	v.SetConfigType(configType)
 
+	//err = v.ReadConfig(bufio.NewReader(defaultConfig))
+	//ioConfig := bytes.NewReader(defaultConfig)
 	err = v.ReadConfig(bytes.NewReader(defaultConfig))
-	//err = v.ReadConfig(bytes.NewReader().)
+	//err = v.ReadInConfig()
 	if err != nil {
 		panic(err)
 	}
+
 	configs := v.AllSettings()
 	for k, v := range configs {
 		viper.SetDefault(k, v)
