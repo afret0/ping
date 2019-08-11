@@ -34,7 +34,6 @@ func init() {
 	conf = new(etc)
 	initConfig()
 	updateConfig()
-
 }
 
 // GetConf ...

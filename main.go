@@ -1,10 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"goFrame/config"
 	"goFrame/libs"
-	"goFrame/router"
+	"goFrame/routers"
 	"os"
 )
 
@@ -23,14 +24,16 @@ func main() {
 
 	logger := libs.GetLogger()
 	conf := config.GetConf()
+	fmt.Println(conf.Ping)
+
 	//app := gin.New()
 	app := gin.Default()
 	//app.Use(gin.Logger())
 
-	router.RegisteredRoot(app)
-	router.RegisteredHello(app)
+	routers.RegisteredRoot(app)
 
-	err := app.Run(":" + conf.Port)
+	//err := app.Run(":" + conf.Port)
+	err := app.Run(":10110")
 
 	if err != nil {
 		logger.Error(err)
