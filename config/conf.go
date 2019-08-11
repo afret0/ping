@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/spf13/viper"
-	//_ "github.com/spf13/viper/remote"
+	_ "github.com/spf13/viper/remote"
 	"goFrame/libs"
 )
 
