@@ -1,4 +1,5 @@
-package libs
+// 获取 mongo 连接
+package mongo
 
 import (
 	"fmt"

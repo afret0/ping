@@ -5,10 +5,12 @@ consul:
   port: 8500
 
 mongo:
-  host: dev-api.neoclub.cn
+#  host: dev-api.neoclub.cn
+  host: localhost
   port: 27017
 
 redis:
-  host: dev-api.neoclub.cn
+#  host: dev-api.neoclub.cn
+  host: localhost
   port: 6379
   pwd:

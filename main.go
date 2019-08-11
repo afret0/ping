@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 	"goFrame/config"
 	"goFrame/libs"
 	"goFrame/router"
@@ -19,11 +18,10 @@ func init() {
 }
 
 func main() {
-	defer libs.CloseRedis()
-	defer libs.CloseMongoSession()
-	logger := libs.GetLogger()
-	logger.Info(viper.GetString("root"))
+	//defer redis.CloseRedis()
+	//defer mongo.CloseMongoSession()
 
+	logger := libs.GetLogger()
 	conf := config.GetConf()
 	//app := gin.New()
 	app := gin.Default()

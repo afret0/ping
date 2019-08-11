@@ -2,10 +2,12 @@ package config
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/spf13/viper"
 	_ "github.com/spf13/viper/remote"
+	"goFrame/libs"
+	"io"
+	"io/ioutil"
 	"time"
 )
 
@@ -31,8 +33,8 @@ type etc struct {
 var conf *etc
 
 func init() {
-	initConfig()
 	conf = new(etc)
+	initConfig()
 	updateConfig()
 
 }
@@ -45,12 +47,15 @@ func GetConf() *etc {
 func updateConfig() {
 	err := viper.Unmarshal(conf)
 	if err != nil {
-		fmt.Println(err)
+		logger := libs.GetLogger()
+		logger.Info(err)
 	}
 }
 func initConfig() {
+	logger := libs.GetLogger()
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
 	box := packr.New("confBox", ".")
+
 	configType := "yaml"
 	defaultConfig, err := box.Find("app.yaml")
 	if err != nil {
@@ -59,7 +64,9 @@ func initConfig() {
 	//创建一个新实例  用来读取 app.yaml 初始文件 并保存为默认配置
 	v := viper.New()
 	v.SetConfigType(configType)
+
 	err = v.ReadConfig(bytes.NewReader(defaultConfig))
+	//err = v.ReadConfig(bytes.NewReader().)
 	if err != nil {
 		panic(err)
 	}
@@ -85,18 +92,26 @@ func initConfig() {
 		}
 	}
 	err = viper.AddRemoteProvider("consul", viper.GetString("consul.host")+":"+viper.GetString("consul.port"), "/dev/uki-goFrame")
+	if err != nil {
+		logger.Info(err)
+	}
 	err = viper.ReadRemoteConfig()
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
+		logger.Info(err)
 	}
 	err = viper.WatchRemoteConfig()
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
+		logger.Info(err)
 	}
 	updateConfig()
 	go func() {
 		for {
-			_ = viper.WatchRemoteConfig()
+			err = viper.WatchRemoteConfig()
+			if err != nil {
+				logger.Info(err)
+			}
 			updateConfig()
 			time.Sleep(time.Second * 5)
 		}

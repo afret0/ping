@@ -9,11 +9,8 @@ var logger *logrus.Logger
 
 func init() {
 	logger = logrus.New()
-}
-
-// GetLogger ...
-func GetLogger() *logrus.Logger {
 	env := os.Getenv("ENV")
+	env = "pro"
 	if env == "pro" {
 		logger.SetFormatter(&logrus.JSONFormatter{})
 	} else {
@@ -29,8 +26,11 @@ func GetLogger() *logrus.Logger {
 		logger.SetFormatter(&logrus.TextFormatter{DisableColors: false,
 			FullTimestamp: false})
 	}
-	//logger.SetOutput(os.Stdout,file)
-	//logger.SetOutput(logger.Writer())
 	logger.SetLevel(logrus.InfoLevel)
+	logger.SetReportCaller(true)
+}
+
+// GetLogger ...
+func GetLogger() *logrus.Logger {
 	return logger
 }
