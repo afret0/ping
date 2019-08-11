@@ -1,6 +1,7 @@
 app: goFrame
 port: 10110
 env: loc
+ping: app
 logLevel: DEBUG
 consul:
   host: 58.246.173.179

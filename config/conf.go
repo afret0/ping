@@ -4,9 +4,8 @@ import (
 	"bytes"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/spf13/viper"
-	_ "github.com/spf13/viper/remote"
+	//_ "github.com/spf13/viper/remote"
 	"goFrame/libs"
-	"time"
 )
 
 type redis struct {
@@ -49,7 +48,7 @@ func updateConfig() {
 	}
 }
 func initConfig() {
-	logger := libs.GetLogger()
+	//logger := libs.GetLogger()
 	//读取文件 使用 packr 方法可以在 build 时 将配置文件打包
 	box := packr.New("confBox", ".")
 
@@ -91,29 +90,31 @@ func initConfig() {
 			panic(err)
 		}
 	}
-	err = viper.AddRemoteProvider("consul", viper.GetString("consul.host")+":"+viper.GetString("consul.port"), "/dev/uki-goFrame")
-	if err != nil {
-		logger.Info(err)
-	}
-	err = viper.ReadRemoteConfig()
-	if err != nil {
-		//fmt.Println(err)
-		logger.Info(err)
-	}
-	err = viper.WatchRemoteConfig()
-	if err != nil {
-		//fmt.Println(err)
-		logger.Info(err)
-	}
-	updateConfig()
-	go func() {
-		for {
-			err = viper.WatchRemoteConfig()
-			if err != nil {
-				logger.Info(err)
-			}
-			updateConfig()
-			time.Sleep(time.Second * 5)
+	/*
+		err = viper.AddRemoteProvider("consul", viper.GetString("consul.host")+":"+viper.GetString("consul.port"), "/dev/uki-goFrame")
+		if err != nil {
+			logger.Info(err)
 		}
-	}()
+		err = viper.ReadRemoteConfig()
+		if err != nil {
+			//fmt.Println(err)
+			logger.Info(err)
+		}
+		err = viper.WatchRemoteConfig()
+		if err != nil {
+			//fmt.Println(err)
+			logger.Info(err)
+		}
+		updateConfig()
+		go func() {
+			for {
+				err = viper.WatchRemoteConfig()
+				if err != nil {
+					logger.Info(err)
+				}
+				updateConfig()
+				time.Sleep(time.Second * 5)
+			}
+		}()
+	*/
 }
