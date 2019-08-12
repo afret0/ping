@@ -1,6 +1,7 @@
 package ping
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"goFrame/config"
 )
@@ -9,6 +10,12 @@ import (
 func Ping(ctx *gin.Context) {
 	//logger := libs.GetLogger()
 	conf := config.GetConf()
+	defer func() {
+		if err := recover(); err != nil {
+			println(err.(string))
+			fmt.Println(111111111)
+		}
+	}()
 	//db := 0
 	//redis := libs.GetRedis(&db)
 	//afreto, err := redis.Get("afreto").Result()
@@ -29,6 +36,7 @@ func Ping(ctx *gin.Context) {
 	//}
 	//logger.Warn(*orderINfo)
 	//logger.Info(conf.Ping)
+	panic(1)
 	kitty := "kitty"
 	kitty = conf.Ping
 	ctx.JSON(200, kitty)

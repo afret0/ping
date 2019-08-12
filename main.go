@@ -28,7 +28,7 @@ func main() {
 
 	app := gin.New()
 	app.Use(gin.Logger())
-	app.Use(gin.Recovery())
+	//app.Use(gin.Recovery())
 
 	routers.RegisteredRoot(app)
 
