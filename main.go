@@ -26,9 +26,9 @@ func main() {
 	conf := config.GetConf()
 	fmt.Println(conf.Ping)
 
-	//app := gin.New()
-	app := gin.Default()
-	//app.Use(gin.Logger())
+	app := gin.New()
+	app.Use(gin.Logger())
+	app.Use(gin.Recovery())
 
 	routers.RegisteredRoot(app)
 

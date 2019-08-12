@@ -29,7 +29,6 @@ func Ping(ctx *gin.Context) {
 	//}
 	//logger.Warn(*orderINfo)
 	//logger.Info(conf.Ping)
-
 	kitty := "kitty"
 	kitty = conf.Ping
 	ctx.JSON(200, kitty)
