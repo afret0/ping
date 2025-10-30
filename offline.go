@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
+
 	"github.com/bsm/redislock"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
-	"strings"
-	"time"
 )
 
 func (s *Service) handleOffline(eventS string) {
@@ -37,7 +38,7 @@ func (s *Service) handleOffline(eventS string) {
 	_, err = s.lock.Obtain(ctx, fmt.Sprintf("%s:pingService:lock:%s", s.Prefix, eventS), LT, nil)
 	if err != nil {
 		if errors.Is(err, redislock.ErrNotObtained) {
-			lg.Infof("未获取到锁, 判断为重复执行")
+			lg.Infof("未获取到锁, 判断为重复执行, event: %s", eventS)
 			return
 		}
 		lg.Errorf("obtain lock failed, 不执行, err: %s", err)
