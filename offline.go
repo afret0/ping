@@ -41,7 +41,7 @@ func (s *Service) handleOffline(eventS string) {
 			lg.Infof("未获取到锁, 判断为重复执行, event: %s", eventS)
 			return
 		}
-		lg.Errorf("obtain lock failed, 不执行, err: %s", err)
+		lg.Errorf("obtain lock failed, 不执行, err: %s, event: %s", err, eventS)
 		return
 	}
 
