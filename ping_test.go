@@ -23,10 +23,12 @@ func Test_ping(t *testing.T) {
 	})
 
 	svr := NewService(RC, &Option{
-		Prefix:        "test",
-		OfflineTTL:    15,
-		OfflineHandle: offlineHandle,
+		Prefix:     "test",
+		OfflineTTL: 15,
 	})
+
+	svr.RegisterOfflineHandle(offlineHandle)
+	svr.StartTick()
 
 	for i := 0; i <= 1000; i++ {
 		_ = svr.Ping(context.Background(), fmt.Sprintf("%d", i))

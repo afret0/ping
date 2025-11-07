@@ -16,9 +16,9 @@ import (
 var ErrRetry = fmt.Errorf("retry")
 
 type Option struct {
-	Prefix        string
-	OfflineTTL    int64
-	OfflineHandle func(uid string) error
+	Prefix     string
+	OfflineTTL int64
+	//OfflineHandle func(uid string) error
 }
 
 type Service struct {
@@ -51,21 +51,19 @@ func NewService(redisClient redis.UniversalClient, opt *Option) *Service {
 	if opt.OfflineTTL <= 3 {
 		panic("offline ttl must be greater than 3")
 	}
-	if opt.OfflineHandle == nil {
-		panic("offline handle is required")
-	}
+	//if opt.OfflineHandle == nil {
+	//	panic("offline handle is required")
+	//}
 
 	svr := &Service{
-		pingQK:        fmt.Sprintf("%s:pingService", opt.Prefix),
-		pingUnAckQK:   fmt.Sprintf("%s:pingService:unAck", opt.Prefix),
-		redis:         redisClient,
-		offlineTTL:    opt.OfflineTTL,
-		Prefix:        opt.Prefix,
-		lock:          redislock.New(redisClient),
-		offlineHandle: opt.OfflineHandle,
+		pingQK:      fmt.Sprintf("%s:pingService", opt.Prefix),
+		pingUnAckQK: fmt.Sprintf("%s:pingService:unAck", opt.Prefix),
+		redis:       redisClient,
+		offlineTTL:  opt.OfflineTTL,
+		Prefix:      opt.Prefix,
+		lock:        redislock.New(redisClient),
+		//offlineHandle: opt.OfflineHandle,
 	}
-
-	svr.StartTick()
 
 	return svr
 }
@@ -91,9 +89,9 @@ func (s *Service) Ping(ctx context.Context, uid string) error {
 	return nil
 }
 
-//func (s *Service) RegisterOfflineHandle(f func(e *Event) error) {
-//	s.offlineHandle = f
-//}
+func (s *Service) RegisterOfflineHandle(f func(uid string) error) {
+	s.offlineHandle = f
+}
 
 func (s *Service) StartTick() {
 
