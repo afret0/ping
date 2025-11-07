@@ -9,8 +9,8 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func offlineHandle(e *Event) error {
-	GetLogger().Infof("offline handle: %+v", e)
+func offlineHandle(uid string) error {
+	GetLogger().Infof("offline handle: %s", uid)
 	//return ErrRetry
 	return nil
 }

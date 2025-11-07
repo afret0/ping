@@ -45,7 +45,7 @@ func (s *Service) handleOffline(eventS string) {
 		return
 	}
 
-	err = s.offlineHandle(e)
+	err = s.offlineHandle(e.Uid)
 	if err != nil {
 		if errors.Is(err, ErrRetry) {
 			e1 := new(Event)

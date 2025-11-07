@@ -18,7 +18,7 @@ var ErrRetry = fmt.Errorf("retry")
 type Option struct {
 	Prefix        string
 	OfflineTTL    int64
-	OfflineHandle func(e *Event) error
+	OfflineHandle func(uid string) error
 }
 
 type Service struct {
@@ -26,7 +26,7 @@ type Service struct {
 	pingUnAckQK   string
 	redis         redis.UniversalClient
 	debug         bool
-	offlineHandle func(e *Event) error
+	offlineHandle func(uid string) error
 	offlineTTL    int64
 	Prefix        string
 
