@@ -4,11 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/bsm/redislock"
-	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
 )
@@ -25,7 +23,6 @@ type Service struct {
 	pingQK        string
 	pingUnAckQK   string
 	redis         redis.UniversalClient
-	debug         bool
 	offlineHandle func(uid string) error
 	offlineTTL    int64
 	Prefix        string
@@ -34,7 +31,7 @@ type Service struct {
 }
 
 type Event struct {
-	Id         string `json:"id"`
+	//Id         string `json:"id"`
 	Uid        string `json:"uid"`
 	RetryCount int    `json:"retryCount"`
 }
@@ -68,15 +65,11 @@ func NewService(redisClient redis.UniversalClient, opt *Option) *Service {
 	return svr
 }
 
-func (s *Service) SetDebug(debug bool) {
-	s.debug = debug
-}
-
 func (s *Service) Ping(ctx context.Context, uid string) error {
 	lg := CtxLogger(ctx).WithFields(logrus.Fields{"uid": uid})
 
 	e := &Event{
-		Id:  strings.ReplaceAll(uuid.New().String(), "-", ""),
+		//Id:  strings.ReplaceAll(uuid.New().String(), "-", ""),
 		Uid: uid,
 	}
 
