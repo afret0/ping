@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/bsm/redislock"
@@ -93,4 +94,12 @@ func (s *Service) StartTick() {
 	}
 
 	go s.startTick()
+}
+
+func (s *Service) debug() bool {
+	env := os.Getenv("PING_DEBUG")
+	if env == "yes" || env == "true" || env == "TRUE" || env == "1" {
+		return true
+	}
+	return false
 }

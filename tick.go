@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/afret0/wheel/tool"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 )
@@ -18,7 +17,7 @@ func (s *Service) startTick() {
 	defer lg.Infof("stop tick")
 
 	for range time.Tick(time.Second) {
-		if tool.Debug() {
+		if s.debug() {
 			lg.Infof("tick")
 		}
 
