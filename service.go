@@ -83,6 +83,28 @@ func (s *Service) Ping(ctx context.Context, uid string) error {
 	return nil
 }
 
+func (s *Service) PingMulti(ctx context.Context, uidL []string) error {
+	lg := CtxLogger(ctx).WithFields(logrus.Fields{})
+
+	if len(uidL) == 0 {
+		return nil
+	}
+
+	now := float64(time.Now().UnixMilli())
+
+	pipe := s.redis.Pipeline()
+	for _, uid := range uidL {
+		pipe.ZAdd(ctx, s.pingQK, redis.Z{Score: now, Member: uid})
+	}
+
+	if _, err := pipe.Exec(ctx); err != nil {
+		lg.Errorf("fail, 批量心跳写入失败, count: %d, err: %s", len(uidL), err)
+		return err
+	}
+
+	return nil
+}
+
 // uidOfMember 兼容两种成员编码：新版是裸 uid，老版（含重试副本）是 Event 的 json。
 func uidOfMember(member string) string {
 	if strings.TrimSpace(member) == "" {
